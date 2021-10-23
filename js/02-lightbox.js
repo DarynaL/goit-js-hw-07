@@ -9,7 +9,7 @@ galleryContainer.addEventListener('click', clickOnGalleryItem);
 
 function createGalleryMarkup(galleryItems) {
     return galleryItems.map(({ preview, original, description }) => {
-       return `<div class="gallery__item">
+       return `<li class="gallery__item">
   <a class="gallery__item" href="${original}">
     <img
       class="gallery__image"
@@ -17,7 +17,7 @@ function createGalleryMarkup(galleryItems) {
       alt="${description}"
     />
   </a>
-</div>
+</li>
 `;
     }).join('');
 }
@@ -25,11 +25,14 @@ function clickOnGalleryItem(evt) {
     evt.preventDefault();
     const onItemUrl = evt.target;
     console.log(onItemUrl);
+  const isColorSwatchEl = evt.target.classList.contains('gallery__image');
+  if (!isColorSwatchEl) {
+    return;
+  }
 
     
     var lightbox = new SimpleLightbox('.gallery a', {
-        counterDelay: 250,
+        captionDelay: 250,
         captionsData: 'alt',
-        showCounter: false,
     });
 }
